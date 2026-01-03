@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Game UAS Grafika</title>
+    <style>
+        body { text-align: center; background: #eee; }
+        canvas { background: #000; display: block; margin: 20px auto; }
+    </style>
+</head>
+<body>
+    <h1>Dodge the Block</h1>
+    <canvas id="game" width="400" height="500"></canvas>
+
+    <script>
+        const canvas = document.getElementById("game");
+        const ctx = canvas.getContext("2d");
+
+        let player = { x: 180, y: 440, w: 40, h: 40 };
+        let enemy = { x: Math.random() * 360, y: 0, w: 40, h: 40 };
+        let score = 0;
+
+        canvas.onmousemove = (e) => {
+            player.x = e.offsetX - player.w / 2;
+        };
+
+        function draw() {
+            ctx.clearRect(0, 0, 400, 500);
+
+            ctx.fillStyle = "blue";
+            ctx.fillRect(player.x, player.y, player.w, player.h);
+
+            ctx.fillStyle = "red";
+            ctx.fillRect(enemy.x, enemy.y, enemy.w, enemy.h);
+
+            enemy.y += 5; 
+
+            if (enemy.y > 500) {
+                enemy.y = 0;
+                enemy.x = Math.random() * 360;
+                score++;
+            }
+
+            if (player.x < enemy.x + enemy.w && player.x + player.w > enemy.x &&
+                player.y < enemy.y + enemy.h && player.y + player.h > enemy.y) {
+                alert("Game Over! Skor: " + score);
+                enemy.y = 0;
+                score = 0;
+            }
+
+            requestAnimationFrame(draw);
+        }
+        draw();
+    </script>
+</body>
+</html>
