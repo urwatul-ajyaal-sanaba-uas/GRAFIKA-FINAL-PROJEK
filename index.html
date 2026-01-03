@@ -3,8 +3,18 @@
 <head>
     <title>Game UAS Grafika</title>
     <style>
-        body { text-align: center; background: #eee; }
-        canvas { background: #000; display: block; margin: 20px auto; }
+        body { text-align: center; 
+               background: #1a1a2e;
+               color: white;
+               font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+               margin: 0;
+               padding: 20px; }
+        canvas { background: #000; 
+                 display: block; 
+                 margin: 20px auto; 
+                 border: 4px solid #4e4eef; 
+                 box-shadow: 0 0 20px rgba(78, 78, 239, 0.5);
+                 cursor: none; }
     </style>
 </head>
 <body>
@@ -17,11 +27,42 @@
 
         let player = { x: 180, y: 440, w: 40, h: 40 };
         let enemy = { x: Math.random() * 360, y: 0, w: 40, h: 40 };
-        let score = 0;
+        let score = 0; 
+
+        let stars = [];
+        for(let i = 0; i < 50; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 2,
+                speed: Math.random() * 2 + 1
+            });
+        }
 
         canvas.onmousemove = (e) => {
             player.x = e.offsetX - player.w / 2;
         };
+
+        function gameOver() {
+            alert("Game Over! Skor Anda: " + score);
+            enemy.y = 0;
+            enemyGrey.y = -250;
+            score = 0;
+            scoreVal.innerText = score;
+        }
+
+        function drawBackground() {
+            ctx.fillStyle = "white";
+            stars.forEach(star => {
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Gerakkan bintang ke bawah agar terasa seperti terbang
+                star.y += star.speed;
+                if(star.y > canvas.height) star.y = 0;
+            });
+        }
 
         function draw() {
             ctx.clearRect(0, 0, 400, 500);
