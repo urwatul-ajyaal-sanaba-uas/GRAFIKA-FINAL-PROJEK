@@ -39,6 +39,9 @@
             });
         }
 
+        let enemyGrey = { x: Math.random() * 360, y: -200, w: 40, h: 40, speed: 3 };
+        let score = 0;
+
         canvas.onmousemove = (e) => {
             player.x = e.offsetX - player.w / 2;
         };
@@ -81,11 +84,22 @@
                 score++;
             }
 
+            if (enemyGrey.y > 500) {
+                enemyGrey.y = 0;
+                enemyGrey.x = Math.random() * 360;
+                score++;
+            } ini
+
             if (player.x < enemy.x + enemy.w && player.x + player.w > enemy.x &&
                 player.y < enemy.y + enemy.h && player.y + player.h > enemy.y) {
                 alert("Game Over! Skor: " + score);
                 enemy.y = 0;
                 score = 0;
+            }
+
+            if (player.x < enemyGrey.x + enemyGrey.w && player.x + player.w > enemyGrey.x &&
+                player.y < enemyGrey.y + enemyGrey.h && player.y + player.h > enemyGrey.y) {
+                gameOver();
             }
 
             requestAnimationFrame(draw);
