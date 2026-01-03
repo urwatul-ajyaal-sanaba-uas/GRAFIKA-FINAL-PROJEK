@@ -14,3 +14,5 @@ Projek ini adalah game sederhana berbasis HTML, dimana pemain harus menghindari 
 # Kebutuhan 
 * Browser (Google Chrome, Firefox)
 * Koneksi Internet (Untuk akses Github)
+
+# Cara menjalankan
