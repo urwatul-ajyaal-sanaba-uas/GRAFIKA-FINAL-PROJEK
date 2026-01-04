@@ -16,3 +16,7 @@ Projek ini adalah game sederhana berbasis HTML, dimana pemain harus menghindari 
 * Koneksi Internet (Untuk akses Github)
 
 # Cara menjalankan
+1. Clone repo:
+   git clone https://github.com/urwatul-ajyaal-sanaba-uas/GRAFIKA-FINAL-PROJEK
+2. buka file index.html
+3. jalankan index.html di browser
